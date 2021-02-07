@@ -8,17 +8,19 @@ const width = Dimensions.get('window').width;
 const PoemCard = (props) => {
   const {poem} = props;
   return (
-    <Card style={styles.container}>
-      <Card.Title
-        title={`${poem.title}`}
-        style={styles.title}
-        titleNumberOfLines={2}
-      />
-      <Card.Content>
-        <Title style={styles.author}>{poem.author}</Title>
-        <Paragraph numberOfLines={6}>{poem.lines}</Paragraph>
-      </Card.Content>
-    </Card>
+    <View key={poem.title} r>
+      <Card style={styles.container}>
+        <Card.Title
+          title={`${poem.title}`}
+          style={styles.title}
+          titleNumberOfLines={2}
+        />
+        <Card.Content>
+          <Title style={styles.author}>{poem.author}</Title>
+          <Paragraph numberOfLines={6}>{poem.lines}</Paragraph>
+        </Card.Content>
+      </Card>
+    </View>
   );
 };
 
@@ -26,27 +28,26 @@ export default PoemCard;
 
 const styles = StyleSheet.create({
   container: {
-    width: width / 2.45,
-    padding: 8,
+    width: width / 2.3,
+    height: 270,
+    paddingTop: 8,
     marginBottom: 15,
   },
 
   title: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 15,
     height: 50,
-    fontFamily: 'Roboto-Italic',
   },
 
   author: {
     marginBottom: 15,
-    fontSize: 12,
+    fontSize: 11,
     fontFamily: 'Roboto-Italic',
   },
 
   content: {
     fontSize: 12,
-    fontFamily: 'Roboto-Italic',
   },
 });

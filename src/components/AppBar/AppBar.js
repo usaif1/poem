@@ -21,7 +21,7 @@ const AppBar = (props) => {
         <View style={{marginLeft: 20}}>
           <TextInput
             style={styles.textInput}
-            placeholder="Enter Poem Or Poet Name"
+            placeholder="Enter Poet"
             autoFocus={true}
             value={value}
             onChangeText={(text) => setValue(text)}

@@ -1,4 +1,5 @@
 //dependencies
+import 'react-native-get-random-values';
 import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
@@ -7,11 +8,12 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import axios from 'axios';
+import {v4 as uuidv4} from 'uuid';
 
 //imports
 import PoemCard from '../components/PoemCard/PoemCard';
 import AppBar from '../components/AppBar/AppBar';
+import {poetryAPI, poetry} from '../utils/Api';
 
 const Home = () => {
   const [poems, setPoems] = useState([]);
@@ -23,9 +25,7 @@ const Home = () => {
 
   const fetchPoems = async () => {
     try {
-      const res = await axios.get(
-        'https://poetrydb.org/random/10/author,title,lines',
-      );
+      const res = await poetryAPI.get(poetry.fetchRandom);
       setPoems(res.data);
     } catch (error) {
       alert('Something went wrong');
@@ -33,23 +33,26 @@ const Home = () => {
     }
   };
 
+  //poem list
+  const poemList = (
+    <View style={styles.poemListContainer}>
+      {poems.length > 0 ? (
+        poems.map((poem) => {
+          return <PoemCard poem={poem} key={uuidv4()} />;
+        })
+      ) : (
+        <View style={{flex: 1}}>
+          <ActivityIndicator size={50} color="#2E7DFF" />
+        </View>
+      )}
+    </View>
+  );
+
   return (
-    <View style={{marginBottom: 10, flex: 1}}>
+    <View style={{flex: 1}}>
       <StatusBar backgroundColor="#ffffff" barStyle="dark-content" />
       <AppBar />
-      <ScrollView>
-        <View style={styles.poemListContainer}>
-          {poems.length > 0 ? (
-            poems.map((poem) => {
-              return <PoemCard poem={poem} />;
-            })
-          ) : (
-            <View style={{flex: 1}}>
-              <ActivityIndicator size={50} color="#2E7DFF" />
-            </View>
-          )}
-        </View>
-      </ScrollView>
+      <ScrollView>{poemList}</ScrollView>
     </View>
   );
 };
@@ -60,7 +63,7 @@ const styles = StyleSheet.create({
   poemListContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginHorizontal: 30,
+    marginHorizontal: 20,
     justifyContent: 'space-between',
     marginTop: 20,
     flex: 1,
