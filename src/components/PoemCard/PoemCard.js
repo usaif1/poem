@@ -1,20 +1,24 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Dimensions} from 'react-native';
+import {Card, Title, Paragraph} from 'react-native-paper';
 
 const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
 
 const PoemCard = (props) => {
   const {poem} = props;
   return (
-    <View style={styles.container}>
-      <Text style={styles.title} numberOfLines={2}>
-        {poem.title}
-      </Text>
-      <Text style={styles.author}>{poem.author}</Text>
-      <Text numberOfLines={6}>{poem.lines}</Text>
-    </View>
+    <Card style={styles.container}>
+      <Card.Title
+        title={`${poem.title}`}
+        style={styles.title}
+        titleNumberOfLines={2}
+      />
+      <Card.Content>
+        <Title style={styles.author}>{poem.author}</Title>
+        <Paragraph numberOfLines={6}>{poem.lines}</Paragraph>
+      </Card.Content>
+    </Card>
   );
 };
 
@@ -22,10 +26,8 @@ export default PoemCard;
 
 const styles = StyleSheet.create({
   container: {
-    height: height / 3.5,
     width: width / 2.45,
     padding: 8,
-    elevation: 0.5,
     marginBottom: 15,
   },
 
