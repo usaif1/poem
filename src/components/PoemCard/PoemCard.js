@@ -1,6 +1,6 @@
 //dependencies
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Dimensions} from 'react-native';
 import {Card, Title, Paragraph} from 'react-native-paper';
 
@@ -11,12 +11,13 @@ const width = Dimensions.get('window').width;
 
 const PoemCard = (props) => {
   const {poem} = props;
-
   var bgColor = bg[Math.floor(Math.random() * bg.length)];
 
   return (
     <View key={poem.title}>
-      <Card style={[styles.container, {backgroundColor: bgColor.hexcode}]}>
+      <Card
+        style={[styles.container, {backgroundColor: bgColor.hexcode}]}
+        onPress={() => props.navigation.navigate('SinglePoem')}>
         <Card.Title
           title={`${poem.title}`}
           titleStyle={[{color: 'white'}, styles.title]}
@@ -39,9 +40,9 @@ export default PoemCard;
 
 const styles = StyleSheet.create({
   container: {
-    width: width / 2.2,
+    width: width / 2.15,
     height: 280,
-    marginBottom: 5,
+    marginBottom: 6,
     borderRadius: 15,
   },
 
