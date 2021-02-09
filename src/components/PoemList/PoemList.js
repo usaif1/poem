@@ -28,37 +28,24 @@ const PoemList = ({navigation}) => {
     setPoems([]);
     setLoading(false);
     setRefreshing(true);
-    fetchPoems(setPoems, setRefreshing, setLoading);
+    fetchPoems(setPoems, setRefreshing, setLoading, poems);
     //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    fetchPoems(setPoems, setRefreshing, setLoading);
+    fetchPoems(setPoems, setRefreshing, setLoading, poems);
     //eslint-disable-next-line
   }, []);
-
-  //poem list
-  const poemList = (
-    <View style={styles.poemListContainer}>
-      {loading ? (
-        <View style={{flex: 1}}>
-          <ActivityIndicator size={50} color="#2E7DFF" />
-        </View>
-      ) : null}
-      {poems.length > 0
-        ? poems.map((poem) => {
-            return (
-              <PoemCard poem={poem} key={uuidv4()} navigation={navigation} />
-            );
-          })
-        : null}
-    </View>
-  );
 
   return (
     <View style={{backgroundColor: '#ffffff', flex: 1}}>
       <StatusBar backgroundColor="#ffffff" barStyle="dark-content" />
       <AppBar />
+      {poems.length === 0 && loading ? (
+        <View style={{flex: 1, marginTop: 10}}>
+          <ActivityIndicator size={50} color="#2E7DFF" />
+        </View>
+      ) : null}
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
