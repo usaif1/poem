@@ -33,7 +33,7 @@ const App = () => {
         })}
         tabBarOptions={{
           activeTintColor: '#2E7DFF',
-          inactiveTintColor: 'gray',
+          inactiveTintColor: '#BCBCBC',
           labelStyle: {fontSize: 13, marginBottom: 5, marginTop: -6},
           style: {height: 55},
           keyboardHidesTabBar: true,

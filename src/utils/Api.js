@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const poems = {
-  fetchRandom: `/random/20/author,title,lines`,
+  fetchRandom: `/random/30/author,title,lines`,
   getByAuthor: `/author,poemcount/`,
   getByTitle: `/title,poemcount/`,
 };

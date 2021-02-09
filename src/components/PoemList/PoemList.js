@@ -1,12 +1,13 @@
 //dependencies
 import 'react-native-get-random-values';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {
   StyleSheet,
   View,
   StatusBar,
   ScrollView,
   ActivityIndicator,
+  RefreshControl,
 } from 'react-native';
 import {v4 as uuidv4, v4} from 'uuid';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -20,26 +21,37 @@ const Stack = createStackNavigator();
 
 const PoemList = ({navigation}) => {
   const [poems, setPoems] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const onRefresh = useCallback(() => {
+    setPoems([]);
+    setLoading(false);
+    setRefreshing(true);
+    fetchPoems(setPoems, setRefreshing, setLoading);
+    //eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
-    fetchPoems(setPoems);
+    fetchPoems(setPoems, setRefreshing, setLoading);
     //eslint-disable-next-line
   }, []);
 
   //poem list
   const poemList = (
     <View style={styles.poemListContainer}>
-      {poems.length > 0 ? (
-        poems.map((poem) => {
-          return (
-            <PoemCard poem={poem} key={uuidv4()} navigation={navigation} />
-          );
-        })
-      ) : (
+      {loading ? (
         <View style={{flex: 1}}>
           <ActivityIndicator size={50} color="#2E7DFF" />
         </View>
-      )}
+      ) : null}
+      {poems.length > 0
+        ? poems.map((poem) => {
+            return (
+              <PoemCard poem={poem} key={uuidv4()} navigation={navigation} />
+            );
+          })
+        : null}
     </View>
   );
 
@@ -47,19 +59,18 @@ const PoemList = ({navigation}) => {
     <View style={{backgroundColor: '#ffffff', flex: 1}}>
       <StatusBar backgroundColor="#ffffff" barStyle="dark-content" />
       <AppBar />
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <View style={styles.poemListContainer}>
-          {poems.length > 0 ? (
-            poems.map((poem) => {
-              return (
-                <PoemCard poem={poem} key={v4()} navigation={navigation} />
-              );
-            })
-          ) : (
-            <View style={{flex: 1}}>
-              <ActivityIndicator size={50} color="#2E7DFF" />
-            </View>
-          )}
+          {poems.length > 0
+            ? poems.map((poem) => {
+                return (
+                  <PoemCard poem={poem} key={v4()} navigation={navigation} />
+                );
+              })
+            : null}
         </View>
       </ScrollView>
     </View>

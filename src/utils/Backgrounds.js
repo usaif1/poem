@@ -12,4 +12,7 @@ export const bg = [
   {name: 'lightRed', hexcode: '#ef5350'},
   {name: 'deepPurple', hexcode: '#AB47BC'},
   {name: 'darkGreen', hexcode: '#388E3C'},
+  {name: 'lightOrange', hexcode: '#FFA041'},
+  {name: 'brightGreen', hexcode: '#00A90D'},
+  {name: 'darkBlue', hexcode: '#009BCC'},
 ];

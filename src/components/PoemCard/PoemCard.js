@@ -10,20 +10,30 @@ import {bg} from '../../utils/Backgrounds';
 const width = Dimensions.get('window').width;
 
 const PoemCard = (props) => {
-  const {poem} = props;
+  const {poem, navigation} = props;
   var bgColor = bg[Math.floor(Math.random() * bg.length)];
 
   return (
     <View key={poem.title}>
       <Card
-        style={[styles.container, {backgroundColor: bgColor.hexcode}]}
-        onPress={() => props.navigation.navigate('SinglePoem')}>
+        style={[
+          styles.container,
+
+          // {backgroundColor: '#00A90D'},
+
+          {backgroundColor: bgColor.hexcode},
+        ]}
+        onPress={() =>
+          navigation.navigate('SinglePoem', {
+            poem: poem,
+          })
+        }>
         <Card.Title
           title={`${poem.title}`}
-          titleStyle={[{color: 'white'}, styles.title]}
+          titleStyle={[{color: 'white', marginLeft: -8}, styles.title]}
           titleNumberOfLines={2}
         />
-        <Card.Content>
+        <Card.Content style={{paddingLeft: 10}}>
           <Title style={[styles.author, {color: 'white'}]} numberOfLines={2}>
             {poem.author}
           </Title>
@@ -44,6 +54,7 @@ const styles = StyleSheet.create({
     height: 280,
     marginBottom: 6,
     borderRadius: 15,
+    paddingRight: 7,
   },
 
   title: {

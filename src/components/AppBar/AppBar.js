@@ -1,6 +1,6 @@
 //dependencies
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, TextInput} from 'react-native';
+import {StyleSheet, View, TextInput} from 'react-native';
 import {Appbar} from 'react-native-paper';
 
 const AppBar = (props) => {
@@ -16,12 +16,15 @@ const AppBar = (props) => {
     <Appbar.Header style={{backgroundColor: '#ffffff'}}>
       {show ? <Appbar.BackAction onPress={closeTextInput} /> : null}
       {!show ? (
-        <Appbar.Content title="Poem App" style={{marginLeft: 18}} />
+        <Appbar.Content
+          title="Enjoy Your Favorite Poems"
+          style={{marginLeft: 18}}
+        />
       ) : (
         <View style={{marginLeft: 20}}>
           <TextInput
             style={styles.textInput}
-            placeholder="Enter Poet"
+            placeholder="Enter Poem"
             autoFocus={true}
             value={value}
             onChangeText={(text) => setValue(text)}
