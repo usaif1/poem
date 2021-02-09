@@ -13,25 +13,15 @@ import {v4 as uuidv4} from 'uuid';
 //imports
 import PoemCard from '../components/PoemCard/PoemCard';
 import AppBar from '../components/AppBar/AppBar';
-import {poetryAPI, poetry} from '../utils/Api';
+import {fetchPoems} from '../actions';
 
 const Home = () => {
   const [poems, setPoems] = useState([]);
 
   useEffect(() => {
-    fetchPoems();
+    fetchPoems(setPoems);
     //eslint-disable-next-line
   }, []);
-
-  const fetchPoems = async () => {
-    try {
-      const res = await poetryAPI.get(poetry.fetchRandom);
-      setPoems(res.data);
-    } catch (error) {
-      alert('Something went wrong');
-      alert(error);
-    }
-  };
 
   //poem list
   const poemList = (
@@ -63,7 +53,7 @@ const styles = StyleSheet.create({
   poemListContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginHorizontal: 20,
+    marginHorizontal: 15,
     justifyContent: 'space-between',
     marginTop: 20,
     flex: 1,

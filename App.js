@@ -15,6 +15,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator
+        sceneContainerStyle={{backgroundColor: '#ffffff'}}
         initialRouteName="Home"
         screenOptions={({route}) => ({
           tabBarIcon: ({focused, color, size}) => {
