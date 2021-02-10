@@ -16,8 +16,19 @@ export const fetchPoems = async (
     } else {
       setLoading(false);
     }
-  } catch (error) {
+  } catch (err) {
     alert('Something went wrong');
-    alert(error);
+    alert(err);
+  }
+};
+
+export const getPoemsByTitle = async (name, setPoems) => {
+  try {
+    const res = await poetryAPI.get(`${poems.getByTitle}/${name}`);
+    setPoems(res.data);
+    return res.data;
+  } catch (err) {
+    alert('Something went wrong!');
+    alert(err);
   }
 };

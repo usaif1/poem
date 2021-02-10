@@ -15,7 +15,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 //imports
 import PoemCard from '../PoemCard/PoemCard';
 import AppBar from '../AppBar/AppBar';
-import {fetchPoems} from '../../actions';
+import {fetchPoems, getPoemsByTitle} from '../../actions';
 
 const Stack = createStackNavigator();
 
@@ -40,7 +40,11 @@ const PoemList = ({navigation}) => {
   return (
     <View style={{backgroundColor: '#ffffff', flex: 1}}>
       <StatusBar backgroundColor="#ffffff" barStyle="dark-content" />
-      <AppBar />
+      <AppBar
+        fetchPoems={getPoemsByTitle}
+        setPoems={setPoems}
+        refreshAction={onRefresh}
+      />
       {poems.length === 0 && loading ? (
         <View style={{flex: 1, marginTop: 10}}>
           <ActivityIndicator size={50} color="#2E7DFF" />

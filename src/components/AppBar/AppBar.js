@@ -7,9 +7,12 @@ const AppBar = (props) => {
   const [show, setShow] = useState(false);
   const [value, setValue] = useState('');
 
+  const {fetchPoems, setPoems, refreshAction} = props;
+
   const closeTextInput = () => {
     setShow(false);
     setValue('');
+    refreshAction();
   };
 
   return (
@@ -32,7 +35,11 @@ const AppBar = (props) => {
         </View>
       )}
       <View style={styles.appbar}>
-        <Appbar.Action icon="magnify" onPress={() => setShow(true)} />
+        <Appbar.Action
+          icon="magnify"
+          onPress={() => (show ? fetchPoems(value, setPoems) : setShow(true))}
+          color="#FF5C5C"
+        />
       </View>
     </Appbar.Header>
   );

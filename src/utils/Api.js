@@ -2,8 +2,8 @@ import axios from 'axios';
 
 export const poems = {
   fetchRandom: `/random/30/author,title,lines`,
-  getByAuthor: `/author,poemcount/`,
-  getByTitle: `/title,poemcount/`,
+  getByAuthor: `/author`,
+  getByTitle: `/title`,
 };
 
 export const poetryAPI = axios.create({
