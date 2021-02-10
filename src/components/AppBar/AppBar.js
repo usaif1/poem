@@ -1,27 +1,33 @@
 //dependencies
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, TextInput} from 'react-native';
+import {StyleSheet, View, TextInput} from 'react-native';
 import {Appbar} from 'react-native-paper';
 
 const AppBar = (props) => {
   const [show, setShow] = useState(false);
   const [value, setValue] = useState('');
 
+  const {fetchPoems, setPoems, refreshAction} = props;
+
   const closeTextInput = () => {
     setShow(false);
     setValue('');
+    refreshAction();
   };
 
   return (
     <Appbar.Header style={{backgroundColor: '#ffffff'}}>
       {show ? <Appbar.BackAction onPress={closeTextInput} /> : null}
       {!show ? (
-        <Appbar.Content title="Poem App" style={{marginLeft: 18}} />
+        <Appbar.Content
+          title="Enjoy Your Favorite Poems"
+          style={{marginLeft: 18}}
+        />
       ) : (
         <View style={{marginLeft: 20}}>
           <TextInput
             style={styles.textInput}
-            placeholder="Enter Poem Or Poet Name"
+            placeholder="Enter Poem"
             autoFocus={true}
             value={value}
             onChangeText={(text) => setValue(text)}
@@ -29,7 +35,11 @@ const AppBar = (props) => {
         </View>
       )}
       <View style={styles.appbar}>
-        <Appbar.Action icon="magnify" onPress={() => setShow(true)} />
+        <Appbar.Action
+          icon="magnify"
+          onPress={() => (show ? fetchPoems(value, setPoems) : setShow(true))}
+          color="#FF5C5C"
+        />
       </View>
     </Appbar.Header>
   );
