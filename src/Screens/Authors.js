@@ -1,10 +1,15 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+
+//imports
+import AppBar from '../components/AppBar/AppBar';
+import AuthorList from '../components/AuthorList/AuthorList';
 
 const Authors = () => {
   return (
-    <View>
-      <Text>Get poems by author</Text>
+    <View style={{flex: 1}}>
+      <AppBar text={`Choose Your Favorite Author`} />
+      <AuthorList />
     </View>
   );
 };

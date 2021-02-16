@@ -7,7 +7,7 @@ const AppBar = (props) => {
   const [show, setShow] = useState(false);
   const [value, setValue] = useState('');
 
-  const {fetchPoems, setPoems, refreshAction} = props;
+  const {fetchPoems, setPoems, refreshAction, text} = props;
 
   const closeTextInput = () => {
     setShow(false);
@@ -19,10 +19,7 @@ const AppBar = (props) => {
     <Appbar.Header style={{backgroundColor: '#ffffff'}}>
       {show ? <Appbar.BackAction onPress={closeTextInput} /> : null}
       {!show ? (
-        <Appbar.Content
-          title="Enjoy Your Favorite Poems"
-          style={{marginLeft: 18}}
-        />
+        <Appbar.Content title={text} style={{marginLeft: 18}} />
       ) : (
         <View style={{marginLeft: 20}}>
           <TextInput

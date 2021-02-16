@@ -44,6 +44,7 @@ const PoemList = ({navigation}) => {
         fetchPoems={getPoemsByTitle}
         setPoems={setPoems}
         refreshAction={onRefresh}
+        text={`Enjoy Your Favorite Poems`}
       />
       {poems.length === 0 && loading ? (
         <View style={{flex: 1, marginTop: 10}}>
