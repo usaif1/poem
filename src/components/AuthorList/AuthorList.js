@@ -19,6 +19,7 @@ const AuthorList = (props) => {
   }, []);
 
   const renderItem = ({item}) => <AuthorCard author={item} />;
+  
   return (
     <View style={{flex: 1}}>
       <FlatList
