@@ -12,12 +12,13 @@ const AuthorCard = (props) => {
     <TouchableHighlight
       underlayColor="#EAEAEA"
       activeOpacity={0.85}
-      onPress={() =>
-        navigation.navigate('PoemsByAuthor', {
-          authorName: author.author,
-          navigation: navigation,
-        })
-      }>
+      // onPress={() =>
+      //   navigation.navigate('PoemsByAuthor', {
+      //     authorName: author.author,
+      //     navigation: navigation,
+      //   })
+      // }
+      onPress={() => alert(author.author)}>
       <Card style={styles.container} elevation={1}>
         <Text style={styles.authorName}>{author.author}</Text>
       </Card>

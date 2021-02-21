@@ -11,8 +11,14 @@ const RandomPoems = ({navigation}) => {
   const [poems, setPoems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const fetchRandomPoems = () => {
+    setLoading(true);
+    setPoems([]);
     fetchPoems(setPoems, setLoading, poems, null);
+  };
+
+  useEffect(() => {
+    fetchRandomPoems();
     //eslint-disable-next-line
   }, []);
 
@@ -22,6 +28,7 @@ const RandomPoems = ({navigation}) => {
         fetchPoems={getPoemsByTitle}
         setPoems={setPoems}
         text={`Enjoy Your Favorite Poems`}
+        fetchAll={fetchRandomPoems}
       />
       {poems.length === 0 && loading ? (
         <View style={{flex: 1, marginTop: 10}}>
