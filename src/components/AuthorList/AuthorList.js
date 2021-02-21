@@ -1,6 +1,12 @@
 //dependencies
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, FlatList} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 
 //imports
 import {fetchAuthors, fetchAuthorsByName} from '../../actions/index';
@@ -27,18 +33,24 @@ const AuthorList = ({navigation}) => {
   );
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: '#ffffff'}}>
       <AppBar
         fetchPoems={fetchAuthorsByName}
         setPoems={setAuthors}
         text={`Search Poems By Author`}
         fetchAll={fetchAuthorlist}
       />
-      <FlatList
-        data={authors}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />
+      {authors.length === 0 && loading ? (
+        <View style={{flex: 1, marginTop: 10}}>
+          <ActivityIndicator size={50} color="#2E7DFF" />
+        </View>
+      ) : (
+        <FlatList
+          data={authors}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
+      )}
     </View>
   );
 };
