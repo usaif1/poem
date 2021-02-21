@@ -7,14 +7,17 @@ import {poetryAPI, poems} from '../utils/Api';
 
 export const fetchPoems = async (
   setPoems,
-  setRefreshing,
   setLoading,
   poemstate,
+  authorName,
 ) => {
+  let url = authorName
+    ? `${poems.getByAuthor}/${authorName}`
+    : poems.fetchRandomPoems;
+
   try {
-    const res = await poetryAPI.get(poems.fetchRandomPoems);
+    const res = await poetryAPI.get(url);
     setPoems(res.data);
-    setRefreshing(false);
     if (poemstate.length === 0) {
       setLoading(true);
     } else {

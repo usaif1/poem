@@ -5,8 +5,9 @@ import {StyleSheet, Text, View, FlatList} from 'react-native';
 //imports
 import {fetchAuthors} from '../../actions/index';
 import AuthorCard from '../AuthorCard/AuthorCard';
+import AppBar from '../AppBar/AppBar';
 
-const AuthorList = (props) => {
+const AuthorList = ({navigation}) => {
   const [authors, setAuthors] = useState([]);
 
   const fetchAuthorlist = () => {
@@ -18,10 +19,13 @@ const AuthorList = (props) => {
     //eslint-disable-next-line
   }, []);
 
-  const renderItem = ({item}) => <AuthorCard author={item} />;
-  
+  const renderItem = ({item}) => (
+    <AuthorCard author={item} navigation={navigation} />
+  );
+
   return (
     <View style={{flex: 1}}>
+      <AppBar text="Search Poems By Author" />
       <FlatList
         data={authors}
         renderItem={renderItem}

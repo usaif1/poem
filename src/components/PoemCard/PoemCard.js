@@ -16,13 +16,7 @@ const PoemCard = (props) => {
   return (
     <View key={poem.title}>
       <Card
-        style={[
-          styles.container,
-
-          // {backgroundColor: '#00A90D'},
-
-          {backgroundColor: bgColor.hexcode},
-        ]}
+        style={[styles.container, {backgroundColor: bgColor.hexcode}]}
         onPress={() =>
           navigation.navigate('SinglePoem', {
             poem: poem,
