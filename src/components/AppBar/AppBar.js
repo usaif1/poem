@@ -7,12 +7,12 @@ const AppBar = (props) => {
   const [show, setShow] = useState(false);
   const [value, setValue] = useState('');
 
-  const {fetchPoems, setPoems, refreshAction, text} = props;
+  const {fetchPoems, setPoems, text, fetchAll} = props;
 
   const closeTextInput = () => {
     setShow(false);
     setValue('');
-    refreshAction();
+    fetchAll();
   };
 
   return (

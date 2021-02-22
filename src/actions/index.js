@@ -7,14 +7,17 @@ import {poetryAPI, poems} from '../utils/Api';
 
 export const fetchPoems = async (
   setPoems,
-  setRefreshing,
   setLoading,
   poemstate,
+  authorName,
 ) => {
+  let url = authorName
+    ? `${poems.getByAuthor}/${authorName}`
+    : poems.fetchRandomPoems;
+
   try {
-    const res = await poetryAPI.get(poems.fetchRandomPoems);
+    const res = await poetryAPI.get(url);
     setPoems(res.data);
-    setRefreshing(false);
     if (poemstate.length === 0) {
       setLoading(true);
     } else {
@@ -41,9 +44,33 @@ export const getPoemsByTitle = async (name, setPoems) => {
 
 export const fetchAuthors = async (setAuthors) => {
   try {
-    const res = await poetryAPI.get(poems.fetchRandomAuthors);
+    const res = await poetryAPI.get(`${poems.getByAuthor}`);
 
-    let authors = new Set(res.data.map((data) => data.author));
+    const authors = res.data.authors.map((author) => {
+      return {
+        id: uuidv4(),
+        author: author,
+      };
+    });
+
+    setAuthors(authors);
+  } catch (err) {
+    alert('Something went wrong');
+    alert(err);
+  }
+};
+
+export const fetchAuthorsByName = async (authorName, setAuthors) => {
+  try {
+    const res = await poetryAPI.get(
+      `${poems.getByAuthor}/${authorName}/author`,
+    );
+
+    let authors = new Set(
+      res.data.map((author) => {
+        return author.author;
+      }),
+    );
 
     authors = Array.from(authors);
 
@@ -55,8 +82,5 @@ export const fetchAuthors = async (setAuthors) => {
         };
       }),
     );
-  } catch (err) {
-    alert('Something went wrong');
-    alert(err);
-  }
+  } catch (error) {}
 };

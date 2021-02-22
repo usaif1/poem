@@ -1,19 +1,28 @@
+//dependencies
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
 
 //imports
-import AppBar from '../components/AppBar/AppBar';
 import AuthorList from '../components/AuthorList/AuthorList';
+import PoemsByAuthor from '../components/PoemsByAuthor/PoemsByAuthor';
+import SinglePoem from './SinglePoem';
+
+const Stack = createStackNavigator();
 
 const Authors = () => {
   return (
-    <View style={{flex: 1}}>
-      <AppBar text={`Choose Your Favorite Author`} />
-      <AuthorList />
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="AuthorList"
+        component={AuthorList}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen name="PoemsByAuthor" component={PoemsByAuthor} />
+      <Stack.Screen name="SinglePoem" component={SinglePoem} />
+    </Stack.Navigator>
   );
 };
 
 export default Authors;
-
-const styles = StyleSheet.create({});
