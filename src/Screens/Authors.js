@@ -5,6 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 //imports
 import AuthorList from '../components/AuthorList/AuthorList';
 import PoemsByAuthor from '../components/PoemsByAuthor/PoemsByAuthor';
+import SinglePoem from './SinglePoem';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,7 @@ const Authors = () => {
         }}
       />
       <Stack.Screen name="PoemsByAuthor" component={PoemsByAuthor} />
+      <Stack.Screen name="SinglePoem" component={SinglePoem} />
     </Stack.Navigator>
   );
 };

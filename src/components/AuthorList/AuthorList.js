@@ -12,6 +12,7 @@ import {
 import {fetchAuthors, fetchAuthorsByName} from '../../actions/index';
 import AuthorCard from '../AuthorCard/AuthorCard';
 import AppBar from '../AppBar/AppBar';
+import Seperator from '../Seperator';
 
 const AuthorList = ({navigation}) => {
   const [authors, setAuthors] = useState([]);
@@ -49,6 +50,7 @@ const AuthorList = ({navigation}) => {
           data={authors}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
+          ItemSeparatorComponent={Seperator}
         />
       )}
     </View>

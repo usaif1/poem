@@ -1,34 +1,30 @@
 //dependencies
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ActivityIndicator} from 'react-native';
 
 //imports
 import PoemList from '../PoemList/PoemList';
-import {fetchPoems} from '../../actions/index';
+import {fetchPoems, getPoemsByTitle} from '../../actions/index';
 import AppBar from '../AppBar/AppBar';
 
 const PoemsByAuthor = (props) => {
   const [poems, setPoems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const {authorName, navigation} = props.route.params;
+  const {authorName} = props.route.params;
+  const {navigation} = props;
 
   useEffect(() => {
     fetchPoems(setPoems, setLoading, poems, authorName);
   }, []);
 
   return (
-    <View style={{flex: 1}}>
-      <AppBar
-        fetchPoems={getPoemsByTitle}
-        setPoems={setPoems}
-        text={`Enjoy Your Favorite Poems`}
-      />
+    <View style={{flex: 1, backgroundColor: '#ffffff'}}>
       {poems.length === 0 && loading ? (
         <View style={{flex: 1, marginTop: 10}}>
           <ActivityIndicator size={50} color="#2E7DFF" />
         </View>
       ) : (
-        <PoemList authorName={null} navigation={navigation} poems={poems} />
+        <PoemList authorName={null} poems={poems} navigation={navigation} />
       )}
     </View>
   );
